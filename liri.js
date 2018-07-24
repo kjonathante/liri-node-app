@@ -29,7 +29,7 @@ function main( command, option ) {
     case 'do-what-it-says':
       console.log( 'do-what-it-says', option );
       var data = fs.readFileSync('./random.txt', {encoding: 'utf8'});
-      var lines = clean( data.split(os.EOL), '');
+      var lines = data.split(os.EOL).filter( val => val.length>0 );
       console.log(lines);
       for ( var val of lines ) {
         var arr = val.split(',');
@@ -42,14 +42,4 @@ function main( command, option ) {
       console.log('i do not know what to do');
       break;
   }
-}
-
-function clean(arr, val) {
-  for( var i = 0; i < arr.length; i++ ) {
-    if (arr[i] == val) {
-      arr.splice(i, 1);
-      i--
-    }
-  }
-  return arr;
 }
