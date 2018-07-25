@@ -4,10 +4,11 @@ var fs = require('fs');
 // node_module
 require('dotenv').config();
 var Twitter = require('twitter');
-
+var Spotify = require('node-spotify-api');
 
 var keys = require('./keys');
-var client = new Twitter(keys.twitter)
+var client = new Twitter(keys.twitter);
+var spotify = new Spotify(keys.spotify);
 
 //console.log(process.env);
 //console.log('keys.spotify ->', keys.spotify);
@@ -37,6 +38,17 @@ function main( command, option ) {
       console.log( 'my-tweets', option );
       break;
     case 'spotify-this-song':
+      var params = {
+        type: 'track',
+        query: 'The Sign',
+      }
+      spotify.search(params, function(error, data){
+        if (error) {
+          console.log(error);
+          return false;
+        }
+        console.log(data);
+      });
       console.log( 'spotify-this-song', option );
       break;
     case 'movie-this':
