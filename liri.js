@@ -1,7 +1,13 @@
-require('dotenv').config();
+// node_native
 var os = require('os');
 var fs = require('fs');
+// node_module
+require('dotenv').config();
+var Twitter = require('twitter');
+
+
 var keys = require('./keys');
+var client = new Twitter(keys.twitter)
 
 //console.log(process.env);
 //console.log('keys.spotify ->', keys.spotify);
@@ -18,6 +24,16 @@ main(command, option);
 function main( command, option ) {
   switch( command ) {
     case 'my-tweets':
+      var params = {
+        screen_name: 'KitJTe',
+        count: 1,
+        exclude_replies: true,
+      };
+      client.get('statuses/user_timeline', params, function(error, tweets, response) {
+        if (!error) {
+          console.log(tweets);
+        }
+      });
       console.log( 'my-tweets', option );
       break;
     case 'spotify-this-song':
