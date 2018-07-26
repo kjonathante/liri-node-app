@@ -3,18 +3,13 @@ var os = require('os');
 var fs = require('fs');
 // node_module
 require('dotenv').config();
-var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
 //my modules
+var tweets = require('./tweets')
 var movie = require('./movie');
-
 var keys = require('./keys');
-var client = new Twitter(keys.twitter);
-var spotify = new Spotify(keys.spotify);
 
-//console.log(process.env);
-//console.log('keys.spotify ->', keys.spotify);
-//console.log('keys.twitter ->', keys.twitter);
+var spotify = new Spotify(keys.spotify);
 
 var arguments = process.argv.slice(2)
 
@@ -27,17 +22,7 @@ main(command, option);
 function main( command, option ) {
   switch( command ) {
     case 'my-tweets':
-      var params = {
-        screen_name: 'KitJTe',
-        count: 1,
-        exclude_replies: true,
-      };
-      client.get('statuses/user_timeline', params, function(error, tweets, response) {
-        if (!error) {
-          console.log(tweets);
-        }
-      });
-      console.log( 'my-tweets', option );
+      tweets.get();
       break;
     case 'spotify-this-song':
       var params = {
