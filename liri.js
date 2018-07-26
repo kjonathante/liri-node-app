@@ -5,6 +5,8 @@ var fs = require('fs');
 require('dotenv').config();
 var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
+//my modules
+var movie = require('./movie');
 
 var keys = require('./keys');
 var client = new Twitter(keys.twitter);
@@ -17,7 +19,7 @@ var spotify = new Spotify(keys.spotify);
 var arguments = process.argv.slice(2)
 
 var command = (arguments.length>0) ? arguments[0] : null;
-var option = (arguments.length>1) ? arguments[1] : null;
+var option = (arguments.length>1) ? arguments[1] : undefined;
 
 main(command, option);
 //console.log(process.argv, arguments);
@@ -52,7 +54,8 @@ function main( command, option ) {
       console.log( 'spotify-this-song', option );
       break;
     case 'movie-this':
-      console.log( 'movie-this', option );
+      movie.get( option || 'Mr. Nobody');
+      //console.log( 'movie-this', option );
       break;
     case 'do-what-it-says':
       console.log( 'do-what-it-says', option );
