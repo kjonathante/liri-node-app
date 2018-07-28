@@ -19,7 +19,7 @@ function main( command, option ) {
       tweets.get();
       break;
     case 'spotify-this-song':
-      console.log( 'spotify-this-song', option );
+      spotify.get( option );
       break;
     case 'movie-this':
       movie.get( option || 'Mr. Nobody');
