@@ -2,12 +2,12 @@ var os = require('os');
 
 require('dotenv').config();
 var Twitter = require('twitter');
-//my modules
+// my module
 var keys = require('./keys');
 
 var twitter = new Twitter(keys.twitter);
 
-if (process.argv[1].indexOf('tweets.js')>-1)
+if (process.argv[1].indexOf('tweets')>-1)
   get();
 
 function get() {

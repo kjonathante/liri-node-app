@@ -5,7 +5,7 @@ var os = require('os');
 var request = require('request');
 
 // can be called from console
-if (process.argv[1].indexOf('movie.js')>-1)
+if (process.argv[1].indexOf('movie')>-1)
   get(process.argv[2] || 'Mr. Nobody');
 
 // search omdbapi by Title
