@@ -22,7 +22,7 @@ function main( command, option ) {
       spotify.get( option );
       break;
     case 'movie-this':
-      movie.get( option || 'Mr. Nobody');
+      movie.get( option );
       //console.log( 'movie-this', option );
       break;
     case 'do-what-it-says':

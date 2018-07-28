@@ -1,15 +1,18 @@
 // native
 var querystring = require('querystring');
 var os = require('os');
-// npm
+// node_module
 var request = require('request');
 
 // can be called from console
-if (process.argv[1].indexOf('movie')>-1)
-  get(process.argv[2] || 'Mr. Nobody');
+if (process.argv[1].indexOf('movie')>-1) {
+  var title = (process.argv.length>2) ? process.argv[2] : undefined;
+  get(title);
+}
 
 // search omdbapi by Title
 function get(title) {
+  title = title || 'Mr. Nobody';
   var params = querystring.stringify({ 
     apikey: 'trilogy',
     t: title,
@@ -21,6 +24,11 @@ function get(title) {
   };
    
   function callback(error, response, body) {
+    if (error) {
+      console.log(error);
+      return false;
+    }
+
     if (!error && response.statusCode == 200) {
       var info = JSON.parse(body);
       console.log(
@@ -36,8 +44,6 @@ function get(title) {
   }
    
   request(options, callback);
-
-  return;
 }
 
 function getRating( sources, provider ) {
@@ -48,7 +54,7 @@ function getRating( sources, provider ) {
     return (val.Source == provider);
   });
 
-  return ((arr.length>0) ? arr[0].Value : '-');
+  return ((arr.length>0) ? arr[0].Value : 'N/A');
 }
 
 // * Title of the movie.
