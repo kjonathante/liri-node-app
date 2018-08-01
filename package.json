@@ -21,9 +21,10 @@
   "homepage": "https://github.com/kjonathante/liri-node-app#readme",
   "dependencies": {
     "dotenv": "^6.0.0",
+    "lame": "^1.2.4",
     "node-spotify-api": "^1.0.7",
-    "player": "^0.6.1",
     "request": "^2.87.0",
+    "speaker": "^0.4.1",
     "twitter": "^1.7.1"
   }
 }
