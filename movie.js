@@ -4,12 +4,6 @@ var os = require('os');
 // node_module
 var request = require('request');
 
-// can be called from console
-if (process.argv[1].indexOf('movie')>-1) {
-  var title = (process.argv.length>2) ? process.argv[2] : undefined;
-  get(title);
-}
-
 // search omdbapi by Title
 function get(title) {
   title = title || 'Mr. Nobody';
@@ -32,6 +26,7 @@ function get(title) {
     if (!error && response.statusCode == 200) {
       var info = JSON.parse(body);
       console.log(
+        '=====> movie-this <=====' + os.EOL +
         'Title: ' + info.Title + os.EOL+
         'Year: '  + info.Year + os.EOL+
         'Rated: ' + info.Rated + os.EOL+
@@ -39,7 +34,8 @@ function get(title) {
         'Country: ' + info.Country + os.EOL+
         'Language: ' + info.Language + os.EOL+
         'Plot: ' + info.Plot + os.EOL+
-        'Actors: ' + info.Actors);
+        'Actors: ' + info.Actors
+      );
     }
   }
    
@@ -66,4 +62,12 @@ function getRating( sources, provider ) {
 // * Plot of the movie.
 // * Actors in the movie.
 
-exports.get = get;
+
+if (require.main === module) {
+  // standalone
+  var title = (process.argv.length>2) ? process.argv[2] : undefined;
+  get(title);
+} else {
+  // module.exports = get;
+  exports.get = get;
+}

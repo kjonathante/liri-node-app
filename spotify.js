@@ -25,7 +25,7 @@ function get(song) {
         var item = data.tracks.items[0];
         var artist = item.artists.map( function(obj) { return obj.name });
         console.log(
-          '=====> spotify-this <=====' + os.EOL +
+          '=====> spotify-this-song <=====' + os.EOL +
           'Artist(s): ' + artist.join(', ') + os.EOL +
           'Name: ' + item.name + os.EOL +
           'Preview Link: ' + (item.preview_url||'N/A') + os.EOL +

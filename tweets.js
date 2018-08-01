@@ -8,13 +8,10 @@ var keys = require('./keys');
 
 var twitter = new Twitter(keys.twitter);
 
-if (process.argv[1].indexOf('tweets')>-1)
-  get();
-
 function get() {
   var params = {
-    screen_name: 'KitJTe',
-    count: 20,
+    screen_name: 'KitJte',
+    count: 21,
     exclude_replies: true,
   };
   twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
@@ -23,13 +20,20 @@ function get() {
       return false;
     }
 
-    var data=""
+    var data='=====> my-tweets <=====' + os.EOL
+    var i = 1;
     for (var tweet of tweets) {
-      data += tweet.created_at + ' - ' + tweet.text + os.EOL;
+      data += '#' + (i++) + ' -- ' + tweet.created_at + os.EOL + tweet.text + os.EOL;
     }
     data = data.slice( 0, data.length -1 );
     console.log(data);
   });
 }
 
-exports.get = get;
+if (require.main === module) {
+  // standalone
+  get();
+} else {
+  // module.exports = get;
+  exports.get = get;
+}
