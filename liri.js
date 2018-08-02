@@ -13,6 +13,17 @@ var option = (arguments.length>1) ? arguments[1] : undefined;
 main(command, option);
 
 function main( command, option ) {
+    //log command
+    try {
+      var date = new Date();
+      var dateStr = date.toDateString()+' '+date.toTimeString();
+      var log = dateStr + ' ' + command + ' ' + option + os.EOL
+      fs.appendFileSync('log.txt',  log, 'utf8');
+    } catch (err) {
+      /* Handle the error */
+      console.log(err);
+    }
+
     switch( command ) {
       case 'my-tweets':
         tweets.get();
